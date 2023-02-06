@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'wa-microblog'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_61118EA0AA304327BDABF2478410B666 }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
