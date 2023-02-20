@@ -1,7 +1,14 @@
-<html>
-    <body>
-        {% block content %}
+{% extends 'bootstrap/base.html' %}
 
-        {% endblock %}
-    </body>
-</html>
+{% block title %}
+    {% if title %}{{ title }} - ToDo{% else %}ToDo{% endif %}
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+
+
+{% block content %}
+{% block app_content %}{% endblock %}
+{% endblock %}
