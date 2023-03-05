@@ -1,5 +1,44 @@
 {% extends "base.html" %}
 
-{% block content %}
-    <h1>Test</h1>
+{% block app_content %}
+    {% if current_user.is_anonymous %}
+    <h1 style="display: inline;">ToDo App - Fach VCID</h1>
+    <p>Noch nicht eingeloggt. Aus diesem Grund nichts ersichtlich.</p>
+    {% else %}
+    <h1 style="display: inline;">ToDos</h1>
+        <a class="btn btn-default" href="{{ url_for('new') }}" role="button" style="margin-bottom: 10px; float:right;">New</a>
+        {% for item in items %}
+            <table class="table table-hover" style="table-layout: fixed">
+                <tr>
+                    <td width="80px">
+                        <a href="">
+                            <img src="{{ item.User.avatar(70) }}" />
+                        </a>
+                    </td>
+                    <td width="40%">
+                        
+                        <a href=""><h4 style="margin-top: 0px;">{{ item.Name }}</h4></a>
+                        <p>
+                            {{ item.Description }}
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            Status: {{ item.Status }}<br>
+                            Date: {{ item.Date }}<br>
+                            Assigned: <a href="">{{ item.User.Username }}</a>
+                        </p>
+                    </td>
+                    <td>    
+                    </td>
+                    <td >
+                        <p>
+                            <a href="">Edit</a><br>
+                            <a href="">Delete</a>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        {% endfor %}
+    {% endif %}
 {% endblock %}
