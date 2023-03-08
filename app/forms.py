@@ -31,6 +31,17 @@ class LoginForm(FlaskForm):
 class NewToDoForm(FlaskForm):
     name = StringField('Titel', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
-    status = SelectField('Status', choices=[('open','Open'),('work','Working'),('wait','Waiting')], validators=[DataRequired()])
+    status = SelectField('Status', choices=[('Open','Open'),('Doing','Doing'),('Waiting','Waiting')], validators=[DataRequired()])
     date = DateField('Date', validators=[DataRequired()])
     submit = SubmitField('Create')
+
+class NewUpdateForm(FlaskForm):
+    titel = StringField('Titel', validators=[DataRequired()])
+    content = TextAreaField('Description', validators=[DataRequired()])
+    submit = SubmitField('Add')
+
+class EditToDoForm(FlaskForm):
+    name = StringField('Titel', validators=[DataRequired()])
+    content = TextAreaField('Description', validators=[DataRequired()])
+    date = DateField('Date', validators=[DataRequired()])
+    submit = SubmitField('Update')

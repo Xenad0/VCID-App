@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <h1 style="display: inline;">{{ todo.Name}}</h1>
+    {% if current_user.ID_User == todo.User_ID %}
+        <div class="dropdown" style="margin-bottom: 10px; float:right; margin-right: 10px;">
+            <button class="btn btn-primary dropdown-toggle" style="display:inline-block;" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Change Status
+            <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="status">
+            {% if todo.Status != "Open" %}
+            <li><a href="{{ url_for('status', id=todo.ID_ToDo, status='Open') }}">Open</a></li>
+            {% endif %}
+            {% if todo.Status != "Waiting" %}
+            <li><a href="{{ url_for('status', id=todo.ID_ToDo, status='Waiting') }}">Waiting</a></li>
+            {% endif %}
+            {% if todo.Status != "Doing" %}
+            <li><a href="{{ url_for('status', id=todo.ID_ToDo, status='Doing') }}">Doing</a></li>
+            {% endif %}
+            {% if todo.Status != "Done" %}
+            <li><a href="{{ url_for('status', id=todo.ID_ToDo, status='Done') }}">Done</a></li>
+            {% endif %}
+            </ul>
+            <a class="btn btn-primary" style="display:inline-block;" href="{{ url_for('edit', id=todo.ID_ToDo) }}" role="button">Edit</a>
+            <a class="btn btn-primary" style="display:inline-block;" href="{{ url_for('delete', id=todo.ID_ToDo) }}" role="button">Delete</a>
+        </div>
+    {% endif %}
+
+    <div class="container" style="margin-top: 30px;">
+        <div class="row">
+            <div class="col-md-4" style="padding-left: 0%;">
+                <h4>Status: {{ todo.Status }}</h4>
+            </div>
+            <div class="col-md-4" style="padding-left: 0%;">
+                <h4>Date: {{ todo.Date.strftime('%d-%m-%Y') }}</h4>
+            </div>
+            <div class="col-md-4" style="padding-left: 0%;">
+                <h4>Assigned: <a href="">{{ todo.User.Username }}</a></h4>
+            </div>
+        </div>
+    </div>
+    <p style="font-size: 16px;">{{ todo.Description }}</p>
+    
+    <h3 style="margin-top: 20px;">Updates</h3>
+    {{ wtf.quick_form(form) }}
+
+    <table class="table table-hover" style="table-layout: fixed; margin-top: 10px;">
+        {% for update in updates %}
+        <tr>
+            <td style="width: 200px;">
+                <p>
+                    <a href="">{{ update.User2.Username }}</a>:<br>
+                    {{ update.Timestamp.strftime('%d-%m-%Y %H:%M:%S') }}
+                </p>
+            </td>
+            <td>
+                <p>
+                    <span style="font-size: 16px;">{{ update.Titel }}</span><br>
+                    {{ update.Content }}
+                </p>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

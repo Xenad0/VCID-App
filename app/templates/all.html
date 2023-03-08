@@ -2,8 +2,8 @@
 
 {% block app_content %}
     <h1>All ToDos</h1>
-    {% for item in items %}
-        <table class="table table-hover" style="table-layout: fixed">
+    <table class="table table-hover" style="table-layout: fixed">
+        {% for item in items %}
             <tr>
                 <td width="80px">
                     <a href="">
@@ -12,7 +12,7 @@
                 </td>
                 <td width="40%">
                     
-                    <a href=""><h4 style="margin-top: 0px;">{{ item.Name }}</h4></a>
+                    <a href="{{ url_for('todo', id=item.ID_ToDo) }}"><h4 style="margin-top: 0px;">{{ item.Name }}</h4></a>
                     <p>
                         {{ item.Description }}
                     </p>
@@ -20,7 +20,7 @@
                 <td>
                     <p>
                         Status: {{ item.Status }}<br>
-                        Date: {{ item.Date }}<br>
+                        Date: {{ item.Date.strftime('%d-%m-%Y') }}<br>
                         Assigned: <a href="">{{ item.User.Username }}</a>
                     </p>
                 </td>
@@ -28,11 +28,13 @@
                 </td>
                 <td >
                     <p>
-                        <a href="">Edit</a><br>
-                        <a href="">Delete</a>
+                        {% if current_user.ID_User == item.User_ID %}
+                        <a href="{{ url_for('edit', id=item.ID_ToDo) }}">Edit</a><br>
+                        <a href="{{ url_for('delete', id=item.ID_ToDo) }}">Delete</a>
+                        {% endif %}
                     </p>
                 </td>
             </tr>
-        </table>
-    {% endfor %}
+        {% endfor %}
+    </table>
 {% endblock %}

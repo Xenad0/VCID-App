@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>Map</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h4>Open</h4>
+                <table class="table table-hover" style="table-layout: fixed">
+                {% for item in items %}
+                    {% if item.Status == "Open" %}
+                        <tr>
+                            <td>
+                                <a href="{{ url_for('todo', id=item.ID_ToDo) }}"><h4 style="margin-top: 0px;">{{ item.Name }}</h4></a>
+                                <p>
+                                    <span style="padding-bottom: 10px;">Date: {{ item.Date.strftime('%d-%m-%Y') }}</span><br>
+                                    <p>{{ item.Description }}</p>
+                                </p>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </table>
+            </div>
+            <div class="col-md-3">
+                <h4>Waiting</h4>
+                <table class="table table-hover" style="table-layout: fixed">
+                {% for item in items %}
+                    {% if item.Status == "Waiting" %}
+                        <tr>
+                            <td>
+                                <a href="{{ url_for('todo', id=item.ID_ToDo) }}"><h4 style="margin-top: 0px;">{{ item.Name }}</h4></a>
+                                <p>
+                                    <span style="padding-bottom: 10px;">Date: {{ item.Date.strftime('%d-%m-%Y') }}</span><br>
+                                    <p>{{ item.Description }}</p>
+                                     
+                                </p>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </table>
+            </div>
+            <div class="col-md-3">
+                <h4>Doing</h4>
+                <table class="table table-hover" style="table-layout: fixed">
+                {% for item in items %}
+                    {% if item.Status == "Doing" %}
+                        <tr>
+                            <td>
+                                <a href="{{ url_for('todo', id=item.ID_ToDo) }}"><h4 style="margin-top: 0px;">{{ item.Name }}</h4></a>
+                                <p>
+                                    <span style="padding-bottom: 10px;">Date: {{ item.Date.strftime('%d-%m-%Y') }}</span><br>
+                                    <p>{{ item.Description }}</p>
+                                </p>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </table>
+            </div>
+            <div class="col-md-3">
+                <h4>Done</h4>
+                <table class="table table-hover" style="table-layout: fixed">
+                {% for item in items %}
+                    {% if item.Status == "Done" %}
+                        <tr>
+                            <td>
+                                <a href="{{ url_for('todo', id=item.ID_ToDo) }}"><h4 style="margin-top: 0px;">{{ item.Name }}</h4></a>
+                                <p>
+                                    <span style="padding-bottom: 10px;">Date: {{ item.Date.strftime('%d-%m-%Y') }}</span><br>
+                                    <p>{{ item.Description }}</p>
+                                </p>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

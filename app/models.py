@@ -14,7 +14,7 @@ class Users(UserMixin, db.Model):
     Mail = db.Column(db.String(128), index=True, unique=True)
     Password = db.Column(db.String(128))
     ToDos = db.relationship('ToDos', backref='User', lazy='dynamic')
-    Comments = db.relationship('Comments', backref='ToDo', lazy='dynamic')
+    Updates = db.relationship('Updates', backref='User2', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -43,13 +43,13 @@ class Users(UserMixin, db.Model):
 class ToDos(db.Model):
     ID_ToDo = db.Column(db.Integer, primary_key=True)
     Name = db.Column(db.String(64))
-    Description = db.Column(db.String(128))
+    Description = db.Column(db.String(1024))
     Status = db.Column(db.String(16))
     Date = db.Column(db.DateTime, default=datetime.utcnow)
     User_ID = db.Column(db.Integer, db.ForeignKey(Users.ID_User))
 
-class Comments(db.Model):
-    ID_Comment = db.Column(db.Integer, primary_key=True)
+class Updates(db.Model):
+    ID_Update = db.Column(db.Integer, primary_key=True)
     Titel = db.Column(db.String(64))
     Content = db.Column(db.String(256))
     Timestamp = db.Column(db.DateTime, default=datetime.utcnow)
