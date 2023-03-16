@@ -35,7 +35,7 @@ def apitoken():
 @login_required
 def apitokengenerate():
     Users.get_token(current_user)
-    return render_template("apitoken.html", title="API")
+    return redirect(url_for('apitoken'))
 
 # Übernommen aus den Beispielen
 @login.user_loader

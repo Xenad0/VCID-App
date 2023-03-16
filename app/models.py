@@ -75,11 +75,12 @@ class Users(UserMixin, db.Model):
         return(returndata)
     
     # Übernommen aus den Beispielen
-    def get_token(self, expires_in=3600):
+    def get_token(self):
         now = datetime.utcnow()
         self.API_Token = base64.b64encode(os.urandom(24)).decode('utf-8')
-        self.API_Expiration = now + timedelta(seconds=expires_in)
+        self.API_Expiration = now + timedelta(days=1)
         db.session.add(self)
+        db.session.commit()
         return self.API_Token
 
     # Übernommen aus den Beispielen
