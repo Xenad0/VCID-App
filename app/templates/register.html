@@ -1,3 +1,4 @@
+<!--Übernommen aus den Beispielen-->
 {% extends "base.html" %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
@@ -8,4 +9,6 @@
             {{ wtf.quick_form(form) }}
         </div>
     </div>
+    <br>
+    <p>Existing User? <a href="{{ url_for('login') }}">Click to Login!</a></p>
 {% endblock %}

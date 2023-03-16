@@ -4,6 +4,7 @@
     {% if title %}{{ title }} - ToDo{% else %}ToDo{% endif %}
 {% endblock %}
 
+<!--Übernommen aus den Beispielen-->
 {% block navbar %}
     <nav class="navbar navbar-default">
         <div class="container">
@@ -17,6 +18,7 @@
                 <a class="navbar-brand" href="{{ url_for('index') }}">ToDo App</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <!--Eigenentwicklung-->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url_for('index') }}">Home</a></li>
                     {% if current_user.is_authenticated %}
@@ -24,10 +26,13 @@
                     <li><a href="{{ url_for('all') }}">All</a></li>
                     {% endif %}
                 </ul>
+                <!--Eigenentwicklung-->
                 <ul class="nav navbar-nav navbar-right">
                     {% if current_user.is_anonymous %}
+                    <li><a href="{{ url_for('register') }}">Register</a></li>
                     <li><a href="{{ url_for('login') }}">Login</a></li>
                     {% else %}
+                    <li><a href="{{ url_for('apitoken') }}">API</a></li>
                     <li><a href="{{ url_for('logout') }}">Logout</a></li>
                     {% endif %}
                 </ul>
@@ -37,7 +42,7 @@
 {% endblock %}
 
 
-
+<!--Übernommen aus den Beispielen-->
 {% block content %}
     <div class="container">
         {% with messages = get_flashed_messages() %}

@@ -1,17 +1,20 @@
+<!--Eigenentwicklung-->
 {% extends "base.html" %}
 
 {% block app_content %}
     <h1>All ToDos</h1>
+    <!--Eigenentwicklung-->
     <table class="table table-hover" style="table-layout: fixed">
         {% for item in items %}
             <tr>
                 <td width="80px">
                     <a href="">
+                        <!--Übernommen aus den Beispielen-->
                         <img src="{{ item.User.avatar(70) }}" />
                     </a>
                 </td>
+                <!--Eigenentwicklung-->
                 <td width="40%">
-                    
                     <a href="{{ url_for('todo', id=item.ID_ToDo) }}"><h4 style="margin-top: 0px;">{{ item.Name }}</h4></a>
                     <p>
                         {{ item.Description }}

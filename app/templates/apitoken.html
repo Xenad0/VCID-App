@@ -1,0 +1,46 @@
+<!--Eigenentwicklung-->
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>API</h1>
+    <!--Eigenentwicklung-->
+    <h4>API-Token</h4>
+    <p>
+        Token:   {{current_user.API_Token}} <br>
+        Expires: {{current_user.API_Expiration}}
+    </p>
+    <!--Eigenentwicklung-->
+    <a class="btn btn-default" href="{{ url_for('apitokengenerate') }}" role="button">Generate</a>
+    <h4>API-URL Übersicht</h4>
+    <p>
+        Um die API zu nutzen, muss der API-Token angegeben werden:<br>
+        Beispiel httpie: http --auth-type bearer -a TOKEN URL
+    </p>
+    <!--Eigenentwicklung-->
+    <table class="table table-hover">
+        <tr>
+            <td>User</td>
+            <td>https://wa-todo-prod-02aaf488.azurewebsites.net/api/user/ID</td>
+        </tr>
+        <tr>
+            <td>Users</td>
+            <td>https://wa-todo-prod-02aaf488.azurewebsites.net/api/users</td>
+        </tr>
+        <tr>
+            <td>ToDo</td>
+            <td>https://wa-todo-prod-02aaf488.azurewebsites.net/api/todo/ID</td>
+        </tr>
+        <tr>
+            <td>ToDos</td>
+            <td>https://wa-todo-prod-02aaf488.azurewebsites.net/api/todos</td>
+        </tr>
+        <tr>
+            <td>Update</td>
+            <td>https://wa-todo-prod-02aaf488.azurewebsites.net/api/update/ID</td>
+        </tr>
+        <tr>
+            <td>Updates</td>
+            <td>https://wa-todo-prod-02aaf488.azurewebsites.net/api/updates</td>
+        </tr>
+    </table>
+{% endblock %}

@@ -1,3 +1,4 @@
+# Übernommen aus den Beispielen
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import login_user, current_user, logout_user, login_required
 from app.forms import LoginForm, RegistrationForm, NewToDoForm, NewUpdateForm, EditToDoForm
@@ -5,8 +6,10 @@ from app.models import Users, ToDos, Updates
 from datetime import datetime
 from app import app, db, login
 
+# Übernommen aus den Beispielen
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/index", methods=['GET', 'POST'])
+# Eigenentwicklung
 def index():
     if current_user.is_anonymous:
         return render_template("index.html", title="Home")
@@ -14,16 +17,32 @@ def index():
         todos = current_user.own_todos()
         return render_template("index.html", title="Home", items=todos)
     
+# Eigenentwicklung
 @app.route("/map", methods=['GET', 'POST'])
 @login_required
 def map():
     todos = current_user.own_todos()
     return render_template("map.html", title="Map", items=todos)
 
+# Eigenentwicklung
+@app.route("/apitoken", methods=['GET', 'POST'])
+@login_required
+def apitoken():
+    return render_template("apitoken.html", title="API")
+
+# Eigenentwicklung
+@app.route("/apitokengenerate", methods=['GET', 'POST'])
+@login_required
+def apitokengenerate():
+    Users.get_token(current_user)
+    return render_template("apitoken.html", title="API")
+
+# Übernommen aus den Beispielen
 @login.user_loader
 def load_user(ID_User):
     return Users.query.get(int(ID_User))
 
+# Übernommen aus den Beispielen
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -38,6 +57,7 @@ def login():
         return redirect(url_for('index'))
     return render_template("login.html", title='Login', form=form)
 
+# Übernommen aus den Beispielen
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -52,6 +72,7 @@ def register():
         return redirect(url_for('login'))
     return render_template("register.html", title='Register', form=form)
 
+# Eigenentwicklung
 @app.route("/todo/<id>", methods=['GET', 'POST'])
 @login_required
 def todo(id):
@@ -67,6 +88,7 @@ def todo(id):
     
     return render_template("todo.html", todo=todo, updates=updates.order_by(Updates.Timestamp.desc()), form=form)
 
+# Eigenentwicklung
 @app.route("/edit/<id>", methods=['GET', 'POST'])
 @login_required
 def edit(id):
@@ -87,6 +109,7 @@ def edit(id):
         
     return redirect(url_for('todo', id=id))
 
+# Eigenentwicklung
 @app.route("/status/<id>/<status>", methods=['GET', 'POST'])
 @login_required
 def status(id, status):
@@ -96,6 +119,7 @@ def status(id, status):
         db.session.commit()
     return redirect(url_for('todo', id=id))
 
+# Eigenentwicklung
 @app.route("/delete/<id>", methods=['GET', 'POST'])
 @login_required
 def delete(id):
@@ -105,6 +129,7 @@ def delete(id):
         db.session.commit()
     return redirect(url_for('index'))
 
+# Eigenentwicklung
 @app.route("/new", methods=['GET', 'POST'])
 @login_required
 def new():
@@ -117,11 +142,13 @@ def new():
 
     return render_template("new.html", title='New ToDo', form=form)
 
+# Übernommen aus den Beispielen
 @app.route("/logout", methods=['GET', 'POST'])
 def logout():
     logout_user()
     return redirect(url_for('index'))
 
+# Eigenentwicklung
 @app.route("/all", methods=['GET', 'POST'])
 @login_required
 def all():
